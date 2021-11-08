@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AssemblyAnalyzer.Formatter
 {
-    class ConstructorFormatter
+    public static class ConstructorFormatter
     {
         public static string Format(ConstructorInfo constrInfo)
         {

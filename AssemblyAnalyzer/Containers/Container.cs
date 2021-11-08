@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AssemblyAnalyzer.Containers
 {
-    class Container : MemberInfo
+    public class Container : MemberInfo
     {
         public List<MemberInfo> Members { get; set; }
 

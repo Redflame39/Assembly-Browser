@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
+using AssemblyAnalyzer;
+using Container = AssemblyAnalyzer.Containers.Container;
 
 namespace Assembly_Browser.ViewModel
 {
@@ -76,13 +78,14 @@ namespace Assembly_Browser.ViewModel
                 OnPropertyChanged(nameof(Namespaces));
             }
         }
+        private readonly AssemblyBrowser assemblyBrowser = new AssemblyBrowser();
 
         private void CreateTree(string FileName)
         {
             Namespaces = null;
             try
             {
-                
+                Namespaces = assemblyBrowser.GetAssemblyInfo(FileName);
                 OnPropertyChanged("Signature");
                 OnPropertyChanged("Members");
                 OnPropertyChanged(nameof(Namespaces));

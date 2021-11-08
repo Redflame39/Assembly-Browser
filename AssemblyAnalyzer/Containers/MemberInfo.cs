@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AssemblyAnalyzer.Containers
 {
-    class MemberInfo
+    public class MemberInfo
     {
         public string Signature { get; set; }
         public string Class { get; set; }

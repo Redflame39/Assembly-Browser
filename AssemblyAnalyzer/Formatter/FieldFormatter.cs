@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AssemblyAnalyzer.Formatter
 {
-    class FieldFormatter
+    public static class FieldFormatter
     {
         public static string Format(FieldInfo fieldInfo)
         {

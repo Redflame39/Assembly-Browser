@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AssemblyAnalyzer.Formatter
 {
-    class PropertyFormatter
+    public static class PropertyFormatter
     {
         public static string Format(PropertyInfo propertyInfo)
         {

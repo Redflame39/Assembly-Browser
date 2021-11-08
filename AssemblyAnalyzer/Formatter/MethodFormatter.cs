@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AssemblyAnalyzer.Formatter
 {
-    class MethodFormatter
+    public static class MethodFormatter
     {
         public static string Format(MethodInfo methodInfo)
         {
