@@ -43,7 +43,6 @@ namespace AssemblyAnalyzer
 
         private static Dictionary<string, Container> GetExtensionNamespaces(Type classType, Dictionary<string, Container> assemblyInfo)
         {
-
             var extensionClasses = new Dictionary<string, Container>();
 
             foreach (var method in classType.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic))
