@@ -3,6 +3,7 @@ using AssemblyAnalyzer.Containers;
 using System.Collections.Generic;
 using AssemblyAnalyzer;
 using System;
+using System.IO;
 
 namespace AssemblyBrowserTest
 {
@@ -25,7 +26,7 @@ namespace AssemblyBrowserTest
             int expected = 0;
             int actual = _assemblyInfo.Count;
             Assert.AreNotEqual(expected, actual);
-        }
+        } 
 
         [Test]
         public void AssemblyHasCorrectClassesNumberTest()
@@ -45,20 +46,78 @@ namespace AssemblyBrowserTest
         }
 
         [Test]
-        public void AssemblyClassHasSpecificMember()
+        public void AssemblyClassHasMemberGetObjectTest()
         {
-            string expectedMemberSignature = "public virtual Object GetRandomValue ()";
+            string memberGetObject = "public virtual Object GetRandomValue ()";
             Container container = (Container)_assemblyInfo[0].Members[0];
-            bool hasMember = false;
+            bool hasMemberGetObject = false;
             foreach (MemberInfo member in container.Members)
             {
-                if (member.Signature.Equals(expectedMemberSignature))
+                if (member.Signature.Equals(memberGetObject))
                 {
-                    hasMember = true;
+                    hasMemberGetObject = true;
                     break;
                 }
             }
-            Assert.IsTrue(hasMember);
+            Assert.IsTrue(hasMemberGetObject);
+        }
+
+        [Test]
+        public void AssemblyClassHasMemberConstructorTest()
+        {
+            string memberConstructor = "public .ctor ()";
+            Container container = (Container)_assemblyInfo[0].Members[0];
+            bool hasMemberConstructor = false;
+            foreach (MemberInfo member in container.Members)
+            {
+                if (member.Signature.Equals(memberConstructor))
+                {
+                    hasMemberConstructor = true;
+                    break;
+                }
+            }
+            Assert.IsTrue(hasMemberConstructor);
+        }
+
+        [Test]
+        public void AssemblyClassHasMemberGeneratorTypePropTest()
+        {
+            string memberGeneratorTypeProp = "public Type GeneratorType { public get_GeneratorType; }";
+            Container container = (Container)_assemblyInfo[0].Members[0];
+            bool hasMemberGeneratorTypeProp = false;
+            foreach (MemberInfo member in container.Members)
+            {
+                if (member.Signature.Equals(memberGeneratorTypeProp))
+                {
+                    hasMemberGeneratorTypeProp = true;
+                    break;
+                }
+            }
+            Assert.IsTrue(hasMemberGeneratorTypeProp);
+        }
+
+        [Test]
+        public void AssemblyClassHasMemberGetGeneratorTypeTest()
+        {
+            string memberGetGeneratorType = "public virtual Type get_GeneratorType ()";
+            Container container = (Container)_assemblyInfo[0].Members[0];
+            bool hasMemberGetGeneratorType = false;
+            foreach (MemberInfo member in container.Members)
+            {
+                if (member.Signature.Equals(memberGetGeneratorType))
+                {
+                    hasMemberGetGeneratorType = true;
+                    break;
+                }
+            }
+            Assert.IsTrue(hasMemberGetGeneratorType);
+        }
+
+        [Test]
+        public void IncorrectAssemblyPathTest()
+        {
+            string path = "../qwe//Assembly.dll";
+            Assert.Throws<FileNotFoundException>(() => _assemblyBrowser.GetAssemblyInfo(path));
         }
     }
 }

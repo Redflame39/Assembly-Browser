@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using AssemblyAnalyzer;
+using AssemblyAnalyzer.Exception;
 using Container = AssemblyAnalyzer.Containers.Container;
 
 namespace Assembly_Browser.ViewModel
@@ -45,7 +46,7 @@ namespace Assembly_Browser.ViewModel
 
             var fileDialog = new OpenFileDialog
             {
-                Filter = "Assemblies|*.dll;*.exe",
+                //Filter = "Assemblies|*.dll;*.exe",
                 Title = "Select assembly",
                 Multiselect = false
             };
@@ -82,20 +83,22 @@ namespace Assembly_Browser.ViewModel
 
         private void CreateTree(string FileName)
         {
-            Namespaces = null;
+            Namespaces = null; 
             try
             {
                 Namespaces = assemblyBrowser.GetAssemblyInfo(FileName);
-                OnPropertyChanged("Signature");
-                OnPropertyChanged("Members");
-                OnPropertyChanged(nameof(Namespaces));
-                MessageBox.Show("Managed");
             }
+
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
-
+                MessageBox.Show("");
+                return;
             }
+
+            OnPropertyChanged("Signature");
+            OnPropertyChanged("Members");
+            OnPropertyChanged(nameof(Namespaces));
+            MessageBox.Show("Managed");
 
             //OnPropertyChanged("Signature");
         }

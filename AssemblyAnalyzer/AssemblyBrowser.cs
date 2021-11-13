@@ -2,11 +2,13 @@
 using AssemblyAnalyzer.Formatter;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using AssemblyAnalyzer.Exception;
 using MemberInfo = AssemblyAnalyzer.Containers.MemberInfo;
 
 namespace AssemblyAnalyzer
@@ -15,6 +17,11 @@ namespace AssemblyAnalyzer
     {
         public List<Container> GetAssemblyInfo(string filePath)
         {
+            string extension = Path.GetExtension(filePath);
+            if (!extension.Equals(".dll") && !extension.Equals(".exe"))
+            {
+                throw new FileIsNotAssemblyException("Passed filepath is not assembly");
+            }
 
             var assembly = Assembly.LoadFrom(filePath);
 
